@@ -13,14 +13,15 @@ const comboPath = path.resolve(__dirname, "combo.txt");
 const combo = fs.readFileSync(comboPath).toString();
 const separator = "[-------------------------------------]";
 
-async function start(): Promise<void> {
+function start(): String {
   const splitedCombo = splitCombo(combo, separator);
   const trimmedCombo = trimCombo(splitedCombo);
   const accounts = getFieldsFromCombo(trimmedCombo);
   //console.log();
   const filteredAccounts = filterAccounts(accounts);
   const joinedUserAndPass = joinUserAndPass(filteredAccounts);
-  await createFilteredComboFile(joinedUserAndPass);
+  const ok = createFilteredComboFile(joinedUserAndPass);
+  return ok;
 }
 
 function splitCombo(combo: string, separator: string) {
@@ -72,10 +73,12 @@ function joinUserAndPass(accounts: Array<Account>) {
   return response.join("\r\n");
 }
 
-async function createFilteredComboFile(accounts: string): Promise<void> {
+function createFilteredComboFile(accounts: string): String {
   fs.writeFile("filteredCombo.txt", accounts, function (err: Error) {
     if (err) return console.log(err);
   });
+  let ok = "ok";
+  return ok;
 }
 
 start();
