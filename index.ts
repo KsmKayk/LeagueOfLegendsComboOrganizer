@@ -4,8 +4,6 @@ import path from "path";
 interface Account {
   user: string;
   pass: string;
-  country: string;
-  nickname: string;
   region: string;
 }
 
@@ -45,15 +43,13 @@ function getFieldsFromCombo(combo: Array<string>) {
     let account = {
       user: "",
       pass: "",
-      country: "",
-      nickname: "",
+
       region: "",
     };
 
     account.user = splitedData[0].split(":")[1];
     account.pass = splitedData[0].split(":")[2];
-    account.country = splitedData[1].split(":")[1];
-    account.nickname = splitedData[2].split(":")[1];
+
     account.region = splitedData[3].split(":")[1];
 
     return account;
